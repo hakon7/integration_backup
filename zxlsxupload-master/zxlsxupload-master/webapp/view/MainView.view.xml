@@ -1,0 +1,87 @@
+<mvc:View controllerName="ztestZTEST_XLS_UPLOAD.controller.MainView" 
+	xmlns:html="http://www.w3.org/1999/xhtml" 
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout.form" 
+	xmlns:u="sap.ui.unified" 
+	xmlns:v="sap.ui.layout" displayBlock="true" 
+	xmlns="sap.m">
+	<App>
+		<pages>
+			<Page title="{i18n>title}" enableScrolling="true" class="sapUiContentPadding" showNavButton="false">
+				<content>
+					<l:SimpleForm editable="true">
+						<l:content>
+							<Toolbar class="sapUiMediumMarginTop">
+								<Label text="{i18n>filename}" required="true"></Label>
+								<u:FileUploader id="idFileUploader" 
+									uploadUrl="/sap/opu/odata/sap/ZTEST_XLS_UPLOAD_SRV/TestTableSet" 
+									sameFilenameAllowed="false"
+									fileType="XLSX" 
+									typeMissmatch="handleTypeMissmatch" 
+									placeholder="{i18n>placeholder}" 
+									style="Emphasized">
+								</u:FileUploader>
+								<Button icon="sap-icon://excel-attachment" 
+									tooltip="{i18n>upload}" 
+									press="onUploadFile">
+								</Button>
+							</Toolbar>
+						</l:content>
+					</l:SimpleForm>
+					<v:VerticalLayout>
+						<Table id="idResultsTable" 
+							growing="true" 
+							growingThreshold="10" 
+							visible="{view>/tableVisibility}" 
+							items="{view>/results}">
+							<headerToolbar>
+								<OverflowToolbar id="otbSubheader">
+									<Title text="{i18n>TableTitle}" level="H2"/>
+									<ToolbarSpacer/>
+									<Button id="editButton" text="Edit" type="Transparent" press="onEdit"/>
+									<Button id="saveButton" text="Save" type="Transparent" press="onSave" visible="false"/>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="{i18n>devid}"></Text>
+								</Column>
+								<Column>
+									<Text text="{i18n>devtype}"></Text>
+								</Column>
+								<Column>
+									<Text text="{i18n>naam}"></Text>
+								</Column>
+								<Column>
+									<Text text="{i18n>devest}"></Text>
+								</Column>
+								<Column>
+									<Text text="{i18n>estdate}"></Text>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{view>DevID}"></Text>
+										<Text text="{view>DevType}"></Text>
+										<Text text="{view>Naam}"></Text>
+										<Text text="{view>DevEst}"></Text>
+										<Text text="{view>EstDate}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</v:VerticalLayout >
+				</content>
+				<Footer>
+					<Toolbar>
+						<content>
+							<ToolbarSpacer/>
+							<Button type="Accept" text="{i18n>Submit}" press="onSubmit"/>
+						</content>
+					</Toolbar>
+				</Footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
